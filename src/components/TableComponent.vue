@@ -81,7 +81,7 @@
         </th>
       </tr>
       <tr>
-        <td>
+        <td colspan="5">
           <table v-for="(row, upperIndex) in getData" :key="upperIndex">
             <tr :class="[row.Id, { sortable: row.DateSent !== null }]">
               <td
@@ -183,11 +183,11 @@
                 <div class="field-wraps">
                   <span :class="'column-4' + ' row-' + upperIndex"
                     ><span>{{
-                      filterQuoteData(row, "FIX", 10, 41)[getSpread]
+                      filterQuoteData(row, "FIX", 11, 41)[getSpread]
                     }}</span>
                     <span
                       v-if="
-                        filterQuoteData(row, 'FIX', 10, 41)[getSpread] !== null
+                        filterQuoteData(row, 'FIX', 11, 41)[getSpread] !== null
                       "
                     >
                       <span v-if="getSpread === 'Yield'">%</span>
@@ -198,12 +198,11 @@
                 <div class="field-wraps">
                   <span :class="'column-5' + ' row-' + upperIndex"
                     ><span>{{
-                      filterQuoteData(row, "FRN", 10, 41)[getSpread]
+                      filterQuoteData(row, "FRN", 11, 41)[getSpread]
                     }}</span>
                     <span
                       v-if="
-                        filterQuoteData(row, 'FRN', 11, 40)[getSpread] !=
-                        undefined
+                        filterQuoteData(row, 'FRN', 11, 40)[getSpread] != null
                       "
                     >
                       <span v-if="getSpread === 'Yield'">%</span>
@@ -624,5 +623,9 @@ table tr td:first-child {
 div.tfoot {
   border: 2px solid #000;
   width: 70%;
+}
+
+td table {
+  width: 100%;
 }
 </style>
