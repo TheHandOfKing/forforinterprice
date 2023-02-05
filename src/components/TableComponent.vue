@@ -80,128 +80,153 @@
           </div>
         </th>
       </tr>
-      <tr
-        v-for="(row, upperIndex) in getData"
-        :key="upperIndex"
-        :class="[row.Id, { sortable: row.DateSent !== null }]"
-      >
-        <td
-          @click="expandRows(row.Quote)"
-          class="text-left"
-          ref="spreadContainer"
-        >
-          <svg
-            v-if="row.DateSent !== null"
-            aria-rotated="true"
-            fill="#000000"
-            height="15px"
-            width="15px"
-            version="1.1"
-            id="first-arrow"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 330 330"
-            xml:space="preserve"
-            class="arrows"
-          >
-            <path
-              id="XMLID_225_"
-              d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+      <tr>
+        <td>
+          <table v-for="(row, upperIndex) in getData" :key="upperIndex">
+            <tr :class="[row.Id, { sortable: row.DateSent !== null }]">
+              <td
+                @click="setQuote(row.Quote)"
+                class="text-left"
+                ref="spreadContainer"
+              >
+                <svg
+                  v-if="row.DateSent !== null"
+                  aria-rotated="true"
+                  fill="#000000"
+                  height="15px"
+                  width="15px"
+                  version="1.1"
+                  id="first-arrow"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 330 330"
+                  xml:space="preserve"
+                  class="arrows"
+                >
+                  <path
+                    id="XMLID_225_"
+                    d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
 	c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
 	s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"
-            /></svg
-          >{{ formatDate(row.DateSent) }}
-        </td>
-        <td :class="{ bolded: row.Quote }" class="text-left">
-          {{ row.Company }}
-        </td>
+                  /></svg
+                >{{ formatDate(row.DateSent) }}
+              </td>
+              <td :class="{ bolded: row.Quote }" class="text-left">
+                {{ row.Company }}
+              </td>
 
-        <td class="flex" v-if="row.Quote !== null">
-          <div class="field-wraps">
-            <span :class="'column-0' + ' row-' + upperIndex">
-              <span>{{ filterQuoteData(row, "FIX", 0, 6)[getSpread] }}</span>
-              <span
-                v-if="filterQuoteData(row, 'FIX', 0, 6)[getSpread] !== null"
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span>
-            </span>
-          </div>
-          <div class="field-wraps">
-            <span :class="'column-1' + ' row-' + upperIndex">
-              <span>{{ filterQuoteData(row, "FRN", 0, 6)[getSpread] }}</span>
-              <span
-                v-if="filterQuoteData(row, 'FRN', 0, 6)[getSpread] !== null"
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span>
-            </span>
-          </div>
+              <td class="flex" v-if="row.Quote !== null">
+                <div class="field-wraps">
+                  <span :class="'column-0' + ' row-' + upperIndex">
+                    <span>{{
+                      filterQuoteData(row, "FIX", 0, 6)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FIX', 0, 6)[getSpread] !== null
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span>
+                  </span>
+                </div>
+                <div class="field-wraps">
+                  <span :class="'column-1' + ' row-' + upperIndex">
+                    <span>{{
+                      filterQuoteData(row, "FRN", 0, 6)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FRN', 0, 6)[getSpread] !== null
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span>
+                  </span>
+                </div>
+              </td>
+              <td class="flex" v-if="row.Quote !== null">
+                <div class="field-wraps">
+                  <span :class="'column-2' + ' row-' + upperIndex"
+                    ><span>{{
+                      filterQuoteData(row, "FIX", 5, 11)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FIX', 5, 11)[getSpread] !== null
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span>
+                  </span>
+                </div>
+                <div class="field-wraps">
+                  <span :class="'column-3' + ' row-' + upperIndex"
+                    ><span>{{
+                      filterQuoteData(row, "FRN", 5, 11)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FRN', 5, 11)[getSpread] !== null
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span></span
+                  >
+                </div>
+              </td>
+              <td class="flex" v-if="row.Quote !== null">
+                <div class="field-wraps">
+                  <span :class="'column-4' + ' row-' + upperIndex"
+                    ><span>{{
+                      filterQuoteData(row, "FIX", 10, 41)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FIX', 10, 41)[getSpread] !== null
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span></span
+                  >
+                </div>
+                <div class="field-wraps">
+                  <span :class="'column-5' + ' row-' + upperIndex"
+                    ><span>{{
+                      filterQuoteData(row, "FRN", 10, 41)[getSpread]
+                    }}</span>
+                    <span
+                      v-if="
+                        filterQuoteData(row, 'FRN', 11, 40)[getSpread] !=
+                        undefined
+                      "
+                    >
+                      <span v-if="getSpread === 'Yield'">%</span>
+                      <span v-else>bp</span>
+                    </span>
+                  </span>
+                </div>
+              </td>
+            </tr>
+            <tr v-if="selectedQuote == row.Quote">
+              <spread-component
+                v-if="row.Quote !== null"
+                :type="types[0]"
+                :data="row.Quote"
+              ></spread-component>
+              <spread-component
+                v-if="row.Quote !== null"
+                :type="types[1]"
+                :data="row.Quote"
+              ></spread-component>
+            </tr>
+          </table>
         </td>
-        <td class="flex" v-if="row.Quote !== null">
-          <div class="field-wraps">
-            <span :class="'column-2' + ' row-' + upperIndex"
-              ><span>{{ filterQuoteData(row, "FIX", 5, 11)[getSpread] }}</span>
-              <span
-                v-if="filterQuoteData(row, 'FIX', 5, 11)[getSpread] !== null"
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span>
-            </span>
-          </div>
-          <div class="field-wraps">
-            <span :class="'column-3' + ' row-' + upperIndex"
-              ><span>{{ filterQuoteData(row, "FRN", 5, 11)[getSpread] }}</span>
-              <span
-                v-if="filterQuoteData(row, 'FRN', 5, 11)[getSpread] !== null"
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span></span
-            >
-          </div>
-        </td>
-        <td class="flex" v-if="row.Quote !== null">
-          <div class="field-wraps">
-            <span :class="'column-4' + ' row-' + upperIndex"
-              ><span>{{ filterQuoteData(row, "FIX", 10, 41)[getSpread] }}</span>
-              <span
-                v-if="filterQuoteData(row, 'FIX', 10, 41)[getSpread] !== null"
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span></span
-            >
-          </div>
-          <div class="field-wraps">
-            <span :class="'column-5' + ' row-' + upperIndex"
-              ><span>{{ filterQuoteData(row, "FRN", 10, 41)[getSpread] }}</span>
-              <span
-                v-if="
-                  filterQuoteData(row, 'FRN', 11, 40)[getSpread] != undefined
-                "
-              >
-                <span v-if="getSpread === 'Yield'">%</span>
-                <span v-else>bp</span>
-              </span>
-            </span>
-          </div>
-        </td>
-        <div class="spread-component">
-          <spread-component
-            v-if="row.Quote !== null"
-            :type="types[0]"
-            :data="row.Quote"
-          ></spread-component>
-          <spread-component
-            v-if="row.Quote !== null"
-            :type="types[1]"
-            :data="row.Quote"
-          ></spread-component>
-        </div>
       </tr>
     </table>
     <div class="tfoot" v-if="isDataLoaded">
@@ -267,6 +292,8 @@ export default {
       dateSortClicked: true,
       companySortClicked: false,
       isDataLoaded: false,
+      isClicked: false,
+      selectedQuote: {},
       types: [],
       sortOrders: {
         DateSent: 1,
@@ -462,6 +489,16 @@ export default {
           component.vnode.elm
         );
       }
+    },
+
+    setQuote(quote) {
+      if (this.isClicked) {
+        this.selectedQuote = {};
+        this.isClicked = false;
+        return;
+      }
+      this.isClicked = true;
+      this.selectedQuote = quote;
     },
   },
 };

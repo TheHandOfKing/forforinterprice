@@ -1,5 +1,0 @@
-{
-  "rules": {
-    "vue/no-unused-components": "off"
-  }
-}
