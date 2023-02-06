@@ -1,5 +1,5 @@
 <template>
-  <tr class="d-flex">
+  <tr>
     <td></td>
     <td>{{ type }}</td>
     <td class="flex" v-if="data !== null">
@@ -55,7 +55,8 @@
       <div class="field-wraps">
         <span
           ><span>{{ filterQuoteData(data, "FRN", 10, 41)[type] }}</span>
-          <span v-if="filterQuoteData(data, 'FRN', 11, 40)[type] != undefined">
+
+          <span v-if="filterQuoteData(data, 'FRN', 11, 40)[type] != null">
             <span v-if="type === 'Yield'">%</span>
             <span v-else>bp</span>
           </span>
@@ -89,5 +90,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.field-wraps {
+  display: inline-block;
+  width: 50%;
+}
 </style>
