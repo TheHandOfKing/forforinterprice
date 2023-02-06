@@ -56,7 +56,7 @@
         <span
           ><span>{{ filterQuoteData(data, "FRN", 10, 41)[type] }}</span>
 
-          <span v-if="filterQuoteData(data, 'FRN', 11, 40)[type] != null">
+          <span v-if="filterQuoteData(data, 'FRN', 11, 41)[type] !== null">
             <span v-if="type === 'Yield'">%</span>
             <span v-else>bp</span>
           </span>

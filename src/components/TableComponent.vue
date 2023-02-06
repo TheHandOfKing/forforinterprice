@@ -197,7 +197,7 @@
                   }}</span>
                   <span
                     v-if="
-                      filterQuoteData(row, 'FRN', 11, 40)[getSpread] != null
+                      filterQuoteData(row, 'FRN', 11, 41)[getSpread] !== null
                     "
                   >
                     <span v-if="getSpread === 'Yield'">%</span>
